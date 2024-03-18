@@ -1,6 +1,10 @@
 use clap::{command, Command, Arg};
 
-pub fn select_proper_mod(){
+use crate::populate_data::ApiData;
+use crate::interactive::run_interactive_mode;
+use crate::calculation::{print_available_currencies, calculate_exchange};
+
+pub fn select_proper_mod(api_data: ApiData) {
     let match_result = command!()
     .subcommand(
         Command::new("interactive")
@@ -35,18 +39,19 @@ pub fn select_proper_mod(){
         Command::new("list")
             .about("This option will print out all available currencies you can convert from and to")
     ).get_matches();
+
     match match_result.subcommand(){
         Some(("interactive", _)) => {
-            println!("Interactive mod was choosen");
+            run_interactive_mode(api_data);
         },
         Some(("exchange", sub_m)) => {
             let source = sub_m.get_one::<String>("source-currency").unwrap();
             let target = sub_m.get_one::<String>("target-currency").unwrap();
             let amount = sub_m.get_one::<String>("amount").unwrap();
-            println!("Exchange for {}, from {}, to {}",amount,source,target);
+            calculate_exchange(api_data,amount,source,target);
         },
         Some(("list", _)) => {
-            println!("List option was choosen");
+            print_available_currencies(api_data);
         },
         _ => {}
     }

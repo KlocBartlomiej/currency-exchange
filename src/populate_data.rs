@@ -13,19 +13,19 @@ struct Response {
 }
 
 #[derive(Deserialize, Serialize, Debug)]
-struct ApiData {
-    date: String,
-    exchange_rates: Vec<ExchangeRate>,
+pub struct ApiData {
+    pub date: String,
+    pub exchange_rates: Vec<ExchangeRate>,
 }
 
 #[derive(Deserialize, Serialize, Debug)]
-struct ExchangeRate {
-    name : String,
-    full_name : String,
-    rate : f32,
+pub struct ExchangeRate {
+    pub name : String,
+    pub full_name : String,
+    pub rate : f32,
 }
 
-pub fn get_values(){    //TODO it should check if value update is needed
+pub fn get_api_data() -> ApiData {    //TODO it should check if value update is needed
     // let response = reqwest::blocking::get("https://api.frankfurter.app/latest").unwrap().text();
     let response = r#"
     {
@@ -119,16 +119,31 @@ pub fn get_values(){    //TODO it should check if value update is needed
     }
 
     let val = v.unwrap();
-    create_and_return_date(currency,val);
+    create_and_return_date(currency,val)
 }
 
-fn create_and_return_date(currency : Response, v : Value){ //TODO it should return our data
+fn create_and_return_date(currency : Response, v : Value) -> ApiData {
+    let mut api_data = ApiData{
+        date: currency.date,
+        exchange_rates: Vec::<ExchangeRate>::with_capacity(currency.rates.capacity()+1)
+    };
 
-    println!("Data was collected on {}", currency.date);
-    println!("{}, {} <=> {}", currency.base, v["EUR"], currency.amount);
-
+    api_data.exchange_rates.push(
+        ExchangeRate{
+            name: currency.base,
+            full_name: v["EUR"].to_string(),
+            rate: currency.amount
+        }
+    );
 
     for(key,value) in currency.rates{
-        println!("{}, {} <=> {}", key, v[key.clone()], value)
+        api_data.exchange_rates.push(
+            ExchangeRate{
+                name: key.clone(),
+                full_name: v[key].to_string(),
+                rate: value
+            }
+        );
     }
+    api_data
 }
