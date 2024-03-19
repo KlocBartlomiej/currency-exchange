@@ -53,6 +53,8 @@ pub fn select_proper_mod(api_data: ApiData) {
         Some(("list", _)) => {
             print_available_currencies(api_data);
         },
-        _ => {}
+        _ => {
+            println!("Please use --help to see all available options.");
+        }
     }
 }

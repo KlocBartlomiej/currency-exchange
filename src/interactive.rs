@@ -14,6 +14,5 @@ pub fn run_interactive_mode(api_data: ApiData) {//TODO implement this function /
     amount.pop();
     source.pop();
     target.pop();
-    println!("{} {} {}", amount, source, target);
     calculate_exchange(api_data,&amount,&source,&target);
 }
