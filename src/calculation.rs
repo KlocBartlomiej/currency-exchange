@@ -1,9 +1,9 @@
-use crate::populate_data::ApiData;
+use crate::api_call_storage::ApiData;
 
 pub fn print_available_currencies(api_data: ApiData) {
     println!("Available currencies: ");
-    for exchange in api_data.exchange_rates {
-        println!("{} {}", exchange.name, exchange.full_name);
+    for currency in api_data.exchange_rates {
+        println!("{} {}", currency.name, currency.full_name);
     }
 }
 
@@ -25,6 +25,6 @@ pub fn calculate_exchange(api_data: ApiData, amount: &String, source: &String, t
     } else {
         let rate = target_rate / source_rate;
         let new_amount = amount.parse::<f32>().unwrap() * rate; //TODO check if parsable
-        println!("Exchanged {} from {} is {} {}, rate = {}", amount, source, new_amount, target, rate);
+        println!("Exchanged {} from {} is {:.2} {}, rate = {}", amount, source, new_amount, target, rate);
     }
 }

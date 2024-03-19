@@ -1,6 +1,6 @@
 use clap::{command, Command, Arg};
 
-use crate::populate_data::ApiData;
+use crate::api_call_storage::ApiData;
 use crate::interactive::run_interactive_mode;
 use crate::calculation::{print_available_currencies, calculate_exchange};
 
