@@ -10,7 +10,6 @@ const RATE_FILE_PATH: &str = "./target/data/rate.json";
 
 #[derive(Deserialize, Serialize, Debug)]
 pub struct ApiData {
-    pub date: String,
     pub exchange_rates: Vec<ExchangeRate>,
 }
 

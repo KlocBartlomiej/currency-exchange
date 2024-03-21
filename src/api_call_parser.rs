@@ -9,7 +9,6 @@ use crate::api_call_storage::{ApiData, ExchangeRate};
 pub struct Response {
     amount: f32,
     base: String,
-    date: String,
     rates: HashMap<String,f32>,
 }
 
@@ -19,7 +18,6 @@ pub fn parse_and_return_data(rate : &str, currency : &str) -> ApiData {
     let currency_value = from_str::<Value>(currency).expect("Error occured during parsing currency");
 
     let mut api_data = ApiData{
-        date: rate_parse.date,
         exchange_rates: Vec::<ExchangeRate>::with_capacity(rate_parse.rates.capacity()+1)
     };
 

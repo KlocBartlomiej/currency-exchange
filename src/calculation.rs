@@ -7,7 +7,7 @@ pub fn print_available_currencies(api_data: ApiData) {
     }
 }
 
-pub fn calculate_exchange(api_data: ApiData, amount: &String, source: &String, target: &String) {
+pub fn calculate_exchange(api_data: ApiData, amount: &String, source: &String, target: &String) -> f32 {
     let mut source_rate = -1.0;
     let mut target_rate = -1.0;
     for exchange in api_data.exchange_rates {
@@ -20,11 +20,12 @@ pub fn calculate_exchange(api_data: ApiData, amount: &String, source: &String, t
     }
     if source_rate < 0.0 {
         //error source currency not found
-    } else if target_rate < 0.0 {
-        //error target currency not found
-    } else {
-        let rate = target_rate / source_rate;
-        let new_amount = amount.parse::<f32>().unwrap() * rate; //TODO check if parsable
-        println!("Exchanged {} from {} is {:.2} {}, rate = {}", amount, source, new_amount, target, rate);
     }
+    if target_rate < 0.0 {
+        //error target currency not found
+    }
+    let rate = target_rate / source_rate;
+    let new_amount = amount.parse::<f32>().unwrap() * rate; //TODO check if parsable
+    println!("Exchanged {} from {} is {:.2} {}, rate = {}", amount, source, new_amount, target, rate);
+    new_amount
 }
