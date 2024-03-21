@@ -40,13 +40,13 @@ fn test_calculation(){
 
 #[test]
 fn test_calculation_target_not_found(){
-    let result = calculate_exchange(&prepare_api_data_for_test(), &"100.0".to_string(), &"Polski złoty".to_string(), &"USD".to_string());
+    let result = calculate_exchange(&prepare_api_data_for_test(), &"100.0".to_string(), &"Polish Złoty".to_string(), &"USD".to_string());
     assert_eq!(result, None);
 }
 
 #[test]
 fn test_calculation_source_not_found(){
-    let result = calculate_exchange(&prepare_api_data_for_test(), &"100.0".to_string(), &"PLN".to_string(), &"Dollar amerykański".to_string());
+    let result = calculate_exchange(&prepare_api_data_for_test(), &"100.0".to_string(), &"PLN".to_string(), &"United States Dollar".to_string());
     assert_eq!(result, None);
 }
 

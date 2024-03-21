@@ -1,7 +1,7 @@
 use crate::data::api_call_storage::ApiData;
 use crate::logic::calculation::calculate_exchange;
 
-pub fn run_interactive_mode(api_data: ApiData) {//TODO implement this function / remove placeholder
+pub fn run_interactive_mode(api_data: ApiData) {
     use std::io::{stdin,stdout,Write};
     println!("Provide amount you'd like to exchange, source currency and target currency. Every value in new line.");
     let mut amount = String::new();

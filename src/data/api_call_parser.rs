@@ -12,10 +12,22 @@ pub struct Response {
     rates: HashMap<String,f32>,
 }
 
-pub fn parse_and_return_data(rate : &str, currency : &str) -> ApiData {
+pub fn parse_and_return_data(rate : &str, currency : &str) -> Option<ApiData> {
 
-    let rate_parse = from_str::<Response>(rate).expect("Error occured during parsing rates");
-    let currency_value = from_str::<Value>(currency).expect("Error occured during parsing currency");
+    let rate_parse = match from_str::<Response>(rate) {
+        Ok(rate_parse) => rate_parse,
+        Err(error) => {
+            println!("Could not parse rates. {}", error);
+            return None;
+        }
+    };
+    let currency_value = match from_str::<Value>(currency) {
+        Ok(currency_value) => currency_value,
+        Err(error) => {
+            println!("Could not parse currencies. {}", error);
+            return None;
+        }
+    };
 
     let mut api_data = ApiData{
         exchange_rates: Vec::<ExchangeRate>::with_capacity(rate_parse.rates.capacity()+1)
@@ -38,5 +50,5 @@ pub fn parse_and_return_data(rate : &str, currency : &str) -> ApiData {
             }
         );
     }
-    api_data
+    Some(api_data)
 }
