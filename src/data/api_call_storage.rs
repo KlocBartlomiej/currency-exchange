@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::path::Path;
 use std::fs::{self, File};
 
-use crate::api_call_parser::parse_and_return_data;
+use crate::data::api_call_parser::parse_and_return_data;
 
 const FILE_PATH: &str = "./target/data";
 const CURRENCY_FILE_PATH: &str = "./target/data/currency.json";

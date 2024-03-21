@@ -3,7 +3,7 @@ use serde::Deserialize;
 use serde_json::de::from_str;
 use serde_json::Value;
 
-use crate::api_call_storage::{ApiData, ExchangeRate};
+use crate::data::api_call_storage::{ApiData, ExchangeRate};
 
 #[derive(Deserialize, Debug)]
 pub struct Response {

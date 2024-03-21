@@ -1,10 +1,10 @@
 use clap::{command, Command, Arg};
 
-use crate::api_call_storage::ApiData;
-use crate::interactive::run_interactive_mode;
-use crate::calculation::{print_available_currencies, calculate_exchange};
+use crate::data::api_call_storage::ApiData;
+use crate::logic::interactive::run_interactive_mode;
+use crate::logic::calculation::{print_available_currencies, calculate_exchange};
 
-pub fn select_proper_mod(api_data: ApiData) {
+pub fn select_and_execute_proper_mod(api_data: ApiData) {
     let match_result = command!()
     .subcommand(
         Command::new("interactive")

@@ -1,5 +1,5 @@
-use crate::api_call_storage::ApiData;
-use crate::calculation::calculate_exchange;
+use crate::data::api_call_storage::ApiData;
+use crate::logic::calculation::calculate_exchange;
 
 pub fn run_interactive_mode(api_data: ApiData) {//TODO implement this function / remove placeholder
     use std::io::{stdin,stdout,Write};

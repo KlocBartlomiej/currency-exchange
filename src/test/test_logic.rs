@@ -1,7 +1,7 @@
 #![cfg(test)]
 
-use crate::api_call_storage::{ApiData, ExchangeRate};
-use crate::calculation::{print_available_currencies, calculate_exchange};
+use crate::data::api_call_storage::{ApiData, ExchangeRate};
+use crate::logic::calculation::{print_available_currencies, calculate_exchange};
 
 fn prepare_api_data_for_test() -> ApiData {
     let mut api_data = ApiData{

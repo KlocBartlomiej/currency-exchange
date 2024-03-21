@@ -1,4 +1,4 @@
-use crate::api_call_storage::ApiData;
+use crate::data::api_call_storage::ApiData;
 
 pub fn print_available_currencies(api_data: ApiData) {
     println!("Available currencies: ");

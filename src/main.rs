@@ -1,16 +1,13 @@
-mod populate_data;
-mod subcommands;
-mod interactive;
-mod calculation;
-mod api_call_storage;
-mod api_call_parser;
+mod data;
+mod logic;
+
 mod test;
 
-use populate_data::get_api_data;
-use subcommands::select_proper_mod;
+use data::populate_data::get_api_data;
+use logic::subcommands::select_and_execute_proper_mod;
 
 fn main(){
     let api_data = get_api_data();
-    select_proper_mod(api_data);
+    select_and_execute_proper_mod(api_data);
 }
 
