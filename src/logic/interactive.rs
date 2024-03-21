@@ -14,5 +14,11 @@ pub fn run_interactive_mode(api_data: ApiData) {//TODO implement this function /
     amount.pop();
     source.pop();
     target.pop();
-    calculate_exchange(api_data,&amount,&source,&target);
+    match calculate_exchange(&api_data,&amount,&source,&target) {
+        result=> {
+            if result ==  None {
+                run_interactive_mode(api_data);
+            }
+        },
+    };
 }

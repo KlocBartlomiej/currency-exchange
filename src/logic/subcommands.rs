@@ -48,7 +48,7 @@ pub fn select_and_execute_proper_mod(api_data: ApiData) {
             let source = sub_m.get_one::<String>("source-currency").unwrap();
             let target = sub_m.get_one::<String>("target-currency").unwrap();
             let amount = sub_m.get_one::<String>("amount").unwrap();
-            calculate_exchange(api_data,amount,source,target);
+            calculate_exchange(&api_data,amount,source,target);
         },
         Some(("list", _)) => {
             print_available_currencies(api_data);

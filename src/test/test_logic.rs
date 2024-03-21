@@ -12,7 +12,7 @@ fn prepare_api_data_for_test() -> ApiData {
         ExchangeRate{
             name: "PLN".to_string(),
             full_name: "Polski złoty".to_string(),
-            rate: 0.25
+            rate: 1.0
         }
     );
 
@@ -20,7 +20,7 @@ fn prepare_api_data_for_test() -> ApiData {
         ExchangeRate{
             name: "USD".to_string(),
             full_name: "Dollar amerykański".to_string(),
-            rate: 1.0
+            rate: 0.25
         }
     );
 
@@ -34,22 +34,24 @@ fn test_print_functionality(){
 
 #[test]
 fn test_calculation(){
-    let api_data = prepare_api_data_for_test();
-    let result = calculate_exchange(api_data, &"100.0".to_string(), &"PLN".to_string(), &"USD".to_string());
-    assert_eq!(result, 25.0);
+    let result = calculate_exchange(&prepare_api_data_for_test(), &"100.0".to_string(), &"PLN".to_string(), &"USD".to_string());
+    assert_eq!(result, Some(25.0));
 }
 
 #[test]
 fn test_calculation_target_not_found(){
-    calculate_exchange(prepare_api_data_for_test(), &"100.0".to_string(), &"Polski złoty".to_string(), &"USD".to_string());
+    let result = calculate_exchange(&prepare_api_data_for_test(), &"100.0".to_string(), &"Polski złoty".to_string(), &"USD".to_string());
+    assert_eq!(result, None);
 }
 
 #[test]
 fn test_calculation_source_not_found(){
-    calculate_exchange(prepare_api_data_for_test(), &"100.0".to_string(), &"PLN".to_string(), &"Dollar amerykański".to_string());
+    let result = calculate_exchange(&prepare_api_data_for_test(), &"100.0".to_string(), &"PLN".to_string(), &"Dollar amerykański".to_string());
+    assert_eq!(result, None);
 }
 
 #[test]
 fn test_calculation_invalid_amount(){
-    calculate_exchange(prepare_api_data_for_test(), &"non_parsable_to_float_string".to_string(), &"PLN".to_string(), &"USD".to_string());
+    let result = calculate_exchange(&prepare_api_data_for_test(), &"non_parsable_to_float_string".to_string(), &"PLN".to_string(), &"USD".to_string());
+    assert_eq!(result, None);
 }
